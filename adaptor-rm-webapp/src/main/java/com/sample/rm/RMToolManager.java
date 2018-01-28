@@ -32,9 +32,16 @@ import com.sample.rm.servlet.ServiceProviderCatalogSingleton;
 import com.sample.rm.ServiceProviderInfo;
 import com.sample.rm.resources.Requirement;
 
+import org.eclipse.lyo.store.Store;
+import org.eclipse.lyo.store.StoreFactory;
+import java.io.IOException;
+import java.net.URI;
 
 // Start of user code imports
 import java.util.concurrent.ThreadLocalRandom;
+
+
+
 import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +57,7 @@ public class RMToolManager {
 	private static final Logger log = LoggerFactory.getLogger(RMToolManager.class);
     // End of user code
     
-    
+    public static Store store = null;
     // Start of user code class_methods
 	private static int randomNumber(int origin, int bound) {
 		return ThreadLocalRandom.current().nextInt(origin, bound);
@@ -81,7 +88,14 @@ public class RMToolManager {
 
     public static void contextInitializeServletListener(final ServletContextEvent servletContextEvent)
     {
-        
+        String sparqlQueryUrl="http://localhost:3030/JiraDataset/query";
+String sparqlUpdateUrl="http://localhost:3030/JiraDataset/update";
+try {
+store = StoreFactory.sparql(sparqlQueryUrl, sparqlUpdateUrl);
+} catch (IOException e) {
+log.error("problem loading properties file", e);
+System.exit(1);
+}
         // Start of user code contextInitializeServletListener
         // TODO Implement code to establish connection to data backbone etc ...
         // End of user code
@@ -129,7 +143,12 @@ public class RMToolManager {
     public static Requirement getRequirement(HttpServletRequest httpServletRequest, final String requirementId)
     {
         Requirement aResource = null;
-        
+        try {
+URI uri = RMToolResourcesFactory.constructURIForRequirement(requirementId);
+aResource = store.getResource(new URI ("urn:x-arq:DefaultGraph"), uri, Requirement.class);
+} catch (Exception e) {
+log.error("Failed to get a ChangeRequest resource", e);
+}
         // Start of user code getRequirement
     	aResource = createRandomRequirement(requirementId);
         // End of user code
