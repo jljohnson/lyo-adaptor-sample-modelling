@@ -126,6 +126,24 @@ public class RMToolManager {
         // End of user code
         return resources;
     }
+    public static List<Requirement> RequirementSelector(HttpServletRequest httpServletRequest, String terms)   
+    {
+        List<Requirement> resources = null;
+        
+        // Start of user code RequirementSelector
+        // TODO Implement code to return a set of resources, based on search criteria 
+        // End of user code
+        return resources;
+    }
+    public static Requirement createRequirement(HttpServletRequest httpServletRequest, final Requirement aResource)
+    {
+        Requirement newResource = null;
+        
+        // Start of user code createRequirement
+        // TODO Implement code to create a resource
+        // End of user code
+        return newResource;
+    }
 
 
     public static Requirement getRequirement(HttpServletRequest httpServletRequest, final String requirementId)
@@ -138,7 +156,22 @@ public class RMToolManager {
         return aResource;
     }
 
+    public static Boolean deleteRequirement(HttpServletRequest httpServletRequest, final String requirementId)
+    {
+        Boolean deleted = false;
+        // Start of user code deleteRequirement
+        // TODO Implement code to delete a resource
+        // End of user code
+        return deleted;
+    }
 
+    public static Requirement updateRequirement(HttpServletRequest httpServletRequest, final Requirement aResource, final String requirementId) {
+        Requirement updatedResource = null;
+        // Start of user code updateRequirement
+        // TODO Implement code to update and return a resource
+        // End of user code
+        return updatedResource;
+    }
 
 
     public static String getETagFromRequirement(final Requirement aResource)
