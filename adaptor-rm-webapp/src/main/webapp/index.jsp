@@ -55,12 +55,21 @@ To revert to the default generated content, delete all content in this file, and
         <p class="lead">This is a homepage of the <em>RM Tool</em> that was generated using
             Eclipse Lyo Toolchain Designer.</p>
         <hr class="my-4">
-        <p>In order to begin exploring it, start from the Service Provider Catalog to see the
-            available Service Providers
-            .</p>
+        <p>To navigate your adaptor's services and resources, using the available Query capabilities, Selection and Creation Dialogs, Start from the Service Provider Catalog. 
+            Note that these are end-user HTML pages, which is very useful for debugging your adaptor.</p>
         <p class="lead">
             <a class="btn btn-primary btn-lg" href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/catalog/singleton").build() %>" role="button">Service Provider
                 Catalog</a>
+        </p>
+        <p>To interact with the adaptor services dedicated for RDF, use <a href="<%= "https://swagger.io/swagger-ui/" %>">Swagger UI</a>
+        </p>
+        <p class="lead">
+			<a class="btn btn-primary btn-lg" href="<%= UriBuilder.fromUri(OSLC4JUtils.getPublicURI()).path("/swagger-ui").build() %>" role="button">generated interactive API console</a>
+        </p>
+        <p>Finally, you can copy the OpenAPI specification document (yaml file) of this adaptor to a <a href="<%= "https://editor.swagger.io" %>">Swagger Editor</a> to generate client SDK code for a number of languages and platforms.
+        </p>
+        <p class="lead">
+			<a class="btn btn-primary btn-lg" href="<%= UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/swagger.yaml").build() %>" role="button">OpenAPI specification document (yaml file)</a>
         </p>
     </div>
 </div>

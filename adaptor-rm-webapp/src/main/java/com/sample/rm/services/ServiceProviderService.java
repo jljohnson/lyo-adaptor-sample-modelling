@@ -49,9 +49,12 @@ import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import com.sample.rm.RMToolManager;
 import com.sample.rm.servlet.ServiceProviderCatalogSingleton;
 
+import io.swagger.annotations.Api;
+
 // Start of user code imports
 // End of user code
 
+@Api(value = "serviceProviders")
 @OslcService(OslcConstants.OSLC_CORE_DOMAIN)
 @Path("serviceProviders")
 public class ServiceProviderService

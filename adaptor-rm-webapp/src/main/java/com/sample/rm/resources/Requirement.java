@@ -71,6 +71,10 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import com.sample.rm.resources.Oslc_rmDomainConstants;
+
+import io.swagger.annotations.ApiModel;
+
+import com.sample.rm.SwaggerConstants;
 import com.sample.rm.resources.DctermsDomainConstants;
 
 // Start of user code imports
@@ -81,6 +85,9 @@ import com.sample.rm.resources.DctermsDomainConstants;
 
 // Start of user code classAnnotations
 // End of user code
+@ApiModel(description = "Requirement Resource Shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH + " that describes " + Oslc_rmDomainConstants.REQUIREMENT_TYPE 
+			+ ". The  model below is only a object structure as derived by swagger.  For a more accurate RDF Description, refer to the Resource Shape."
+		)
 @OslcNamespace(Oslc_rmDomainConstants.REQUIREMENT_NAMESPACE)
 @OslcName(Oslc_rmDomainConstants.REQUIREMENT_LOCALNAME)
 @OslcResourceShape(title = "Requirement Resource Shape", describes = Oslc_rmDomainConstants.REQUIREMENT_TYPE)

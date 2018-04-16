@@ -90,6 +90,8 @@ public class Application extends OslcWinkApplication {
         RESOURCE_CLASSES.add(ResourceShapeService.class);
 
         // Start of user code Custom Resource Classes
+        RESOURCE_CLASSES.add(io.swagger.jaxrs.listing.ApiListingResource.class);
+        RESOURCE_CLASSES.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
             // End of user code
 
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_ALLOWED_VALUES,           AllowedValues.class);

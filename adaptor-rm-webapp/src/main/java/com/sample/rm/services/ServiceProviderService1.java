@@ -75,10 +75,17 @@ import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 
 import com.sample.rm.RMToolManager;
+import com.sample.rm.SwaggerConstants;
 import com.sample.rm.RMToolConstants;
 import com.sample.rm.resources.Oslc_rmDomainConstants;
 import com.sample.rm.resources.Oslc_rmDomainConstants;
 import com.sample.rm.servlet.ServiceProviderCatalogSingleton;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import com.sample.rm.resources.Requirement;
 
 // Start of user code imports
@@ -86,6 +93,7 @@ import com.sample.rm.resources.Requirement;
 
 // Start of user code pre_class_code
 // End of user code
+@Api(value = "requirements", description = "OSLC service for resources of type" + "Requirement")
 @OslcService(Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_DOMAIN)
 @Path("requirements")
 public class ServiceProviderService1
@@ -113,6 +121,10 @@ public class ServiceProviderService1
         resourceTypes = {Oslc_rmDomainConstants.REQUIREMENT_TYPE},
         usages = {}
     )
+    @ApiOperation(value = "query Capability on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+    	notes = "query Capability on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+    	produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+	)
     @GET
     @Path("query")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
@@ -130,7 +142,7 @@ public class ServiceProviderService1
         if (null != limitString) {
             limit = Integer.parseInt(limitString);
         }
-
+ 
         // Start of user code queryRequirements
         // Here additional logic can be implemented that complements main action taken in RMToolManager
         // End of user code
@@ -141,6 +153,10 @@ public class ServiceProviderService1
 
     @GET
     @Path("query")
+    @ApiOperation(value = "query Capability on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+	notes = "query Capability on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+	produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     @Produces({ MediaType.TEXT_HTML })
     public Response queryRequirementsAsHtml(
                                     
@@ -192,6 +208,9 @@ public class ServiceProviderService1
          usages = {}
     )
     @GET
+    @ApiOperation(value = "Selection Dialog on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE,
+	notes = "Selection Dialog on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE
+    		)
     @Path("selector")
     @Consumes({ MediaType.TEXT_HTML, MediaType.WILDCARD })
     public void RequirementSelector(
@@ -265,6 +284,9 @@ public class ServiceProviderService1
     }
 
     @GET
+    @ApiOperation(value = "GET on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+    	produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     @Path("{requirementId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     public Requirement getRequirement(
@@ -288,6 +310,9 @@ public class ServiceProviderService1
 
     @GET
     @Path("{requirementId}")
+    @ApiOperation(value = "GET on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+		produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     @Produces({ MediaType.TEXT_HTML })
     public Response getRequirementAsHtml(
         @PathParam("requirementId") final String requirementId
@@ -312,6 +337,9 @@ public class ServiceProviderService1
 
     @GET
     @Path("{requirementId}")
+    @ApiOperation(value = "GET on " + Oslc_rmDomainConstants.REQUIREMENT_TYPE + " resources, with shape " + SwaggerConstants.SERVLET_URI + Oslc_rmDomainConstants.REQUIREMENT_SHAPE_PATH,
+		produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     @Produces({OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML})
     public Compact getRequirementCompact(
         @PathParam("requirementId") final String requirementId
