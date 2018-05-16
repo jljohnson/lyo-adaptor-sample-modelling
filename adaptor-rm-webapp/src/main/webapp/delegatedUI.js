@@ -131,13 +131,37 @@ function sendCancelResponse() {
   }
 }
 
+function escapeCSSAttack(url) {
+    var out = "";
+    for(var i=0; i<url.length; i++) {
+        if(url[i] === '<') {
+            out += '&amp;lt;';
+        } else if(url[i] === '>') {
+            out += '&amp;gt;';
+        } else if(url[i] === "'") {
+            out += '&amp;#39;';
+        } else if(url[i] === '"') {
+            out += '&amp;quot;';
+        } else {
+            out += url[i];
+        }
+    }
+    return out;
+}
 
 function respondWithWindowName(/*string*/ response) {
-   var returnURL = window.name;
-   window.name = response;
-   window.location.href = returnURL;
+  var unsafeReturnUrl = window.name;
+  var sanitisedReturnUrl = escapeCSSAttack(unsafeReturnUrl);
 
+  if(unsafeReturnUrl === sanitisedReturnUrl) {
+    window.name = response;
+    window.location.href = sanitisedReturnUrl;
+  }
+  else{
+    console.error("window.name contained unsafe characters. Sanitised copy: " + sanitisedReturnUrl);
+  }
 }
+
 
 function respondWithPostMessage(/*string*/ response) {
   if( window.parent != null ) {
