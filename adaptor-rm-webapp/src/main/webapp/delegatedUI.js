@@ -99,8 +99,7 @@ function select() {
 
 function sendResponse(oslcResponse) {
   if (window.location.hash == '#oslc-core-windowName-1.0') {
-    // Window Name protocol in use
-    respondWithWindowName(oslcResponse);
+    console.error("Window Protocol is not supported in Lyo Generator");
   } else if (window.location.hash == '#oslc-core-postMessage-1.0') {
     // Post Message protocol in use
     respondWithPostMessage(oslcResponse);
@@ -111,11 +110,10 @@ function sendRawResponse(jsonObj) {
   var oslcResponse = "oslc-response:" + JSON.stringify(jsonObj, null, 2);
 
   if (window.location.hash == '#oslc-core-windowName-1.0') {
-      // Window Name protocol in use
-        respondWithWindowName(oslcResponse);
+      console.error("Window Protocol is not supported in Lyo Generator");
   } else if (window.location.hash == '#oslc-core-postMessage-1.0') {
       // Post Message protocol in use
-    respondWithPostMessage(oslcResponse);
+      respondWithPostMessage(oslcResponse);
   }
 }
 
@@ -123,45 +121,12 @@ function sendCancelResponse() {
   var oslcResponse = 'oslc-response:{ "oslc:results": [ ]}';
 
   if (window.location.hash == '#oslc-core-windowName-1.0') {
-      // Window Name protocol in use
-        respondWithWindowName(oslcResponse);
+      console.error("Window Protocol is not supported in Lyo Generator");
   } else if (window.location.hash == '#oslc-core-postMessage-1.0') {
       // Post Message protocol in use
     respondWithPostMessage(oslcResponse);
   }
 }
-
-function escapeCSSAttack(url) {
-    var out = "";
-    for(var i=0; i<url.length; i++) {
-        if(url[i] === '<') {
-            out += '&amp;lt;';
-        } else if(url[i] === '>') {
-            out += '&amp;gt;';
-        } else if(url[i] === "'") {
-            out += '&amp;#39;';
-        } else if(url[i] === '"') {
-            out += '&amp;quot;';
-        } else {
-            out += url[i];
-        }
-    }
-    return out;
-}
-
-function respondWithWindowName(/*string*/ response) {
-  var unsafeReturnUrl = window.name;
-  var sanitisedReturnUrl = escapeCSSAttack(unsafeReturnUrl);
-
-  if(unsafeReturnUrl === sanitisedReturnUrl) {
-    window.name = response;
-    window.location.href = sanitisedReturnUrl;
-  }
-  else{
-    console.error("window.name contained unsafe characters. Sanitised copy: " + sanitisedReturnUrl);
-  }
-}
-
 
 function respondWithPostMessage(/*string*/ response) {
   if( window.parent != null ) {

@@ -32,7 +32,7 @@ To revert to the default generated content, delete all content in this file, and
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 <%
   String selectionDialogUri = request.getParameter("selectionUri");
-  selectionDialogUri += "#oslc-core-windowName-1.0";
+  selectionDialogUri += "#oslc-core-postMessage-1.0";
 %>
 <html>
 <head>
