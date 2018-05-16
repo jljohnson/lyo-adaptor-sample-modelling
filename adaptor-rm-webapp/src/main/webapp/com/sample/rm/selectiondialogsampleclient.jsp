@@ -31,8 +31,7 @@ To revert to the default generated content, delete all content in this file, and
 <%@page import="org.eclipse.lyo.oslc4j.core.model.ServiceProvider" %>
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 <%
-  String selectionDialogUri = request.getParameter("selectionUri");
-  selectionDialogUri += "#oslc-core-postMessage-1.0";
+  String selectionDialogUri = request.getParameter("selectionUri") + "#oslc-core-postMessage-1.0";
 %>
 <html>
 <head>
@@ -63,10 +62,11 @@ To revert to the default generated content, delete all content in this file, and
       <div class="panel panel-primary">
         <div class="panel-heading">Selection Dialog frame</div>
         <div class="panel-body">
-          <iframe src="<%= selectionDialogUri %>" id="delegatedUI"></iframe>
+          <iframe src="<c:url value="<%= selectionDialogUri %>"/>" id="delegatedUI"></iframe>
         </div>
         <div class="panel-footer">
-          <p>URI: <em style="word-wrap:break-word;"><%= selectionDialogUri %></em></p>
+          <p>URI:
+            <em style="word-wrap:break-word;"><c:out value="<%= selectionDialogUri %>"/></em></p>
         </div>
       </div>
     </div>
