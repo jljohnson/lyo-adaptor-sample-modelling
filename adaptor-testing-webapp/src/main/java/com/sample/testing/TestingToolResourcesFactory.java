@@ -27,8 +27,8 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.eclipse.lyo.oslc4j.core.model.Link;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
-import com.sample.testing.resources.TestScript;
 import com.sample.testing.resources.Requirement;
+import com.sample.testing.resources.TestScript;
 
 // Start of user code imports
 // End of user code
@@ -44,6 +44,36 @@ public class TestingToolResourcesFactory {
     // Start of user code class_methods
     // End of user code
 
+    //methods for Requirement resource
+    public static Requirement createRequirement(final String serviceProviderId, final String requirementId)
+           throws URISyntaxException
+    {
+        return new Requirement(constructURIForRequirement(serviceProviderId, requirementId));
+    }
+    
+    public static URI constructURIForRequirement(final String serviceProviderId, final String requirementId)
+    {
+        String basePath = OSLC4JUtils.getServletURI();
+        Map<String, Object> pathParameters = new HashMap<String, Object>();
+        pathParameters.put("serviceProviderId", serviceProviderId);
+        pathParameters.put("requirementId", requirementId);
+        String instanceURI = "serviceProviders1/{serviceProviderId}/service2/resources/requirements/{requirementId}";
+    
+        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        return builder.path(instanceURI).buildFromMap(pathParameters);
+    }
+    
+    public static Link constructLinkForRequirement(final String serviceProviderId, final String requirementId , final String label)
+    {
+        return new Link(constructURIForRequirement(serviceProviderId, requirementId), label);
+    }
+    
+    public static Link constructLinkForRequirement(final String serviceProviderId, final String requirementId)
+    {
+        return new Link(constructURIForRequirement(serviceProviderId, requirementId));
+    }
+    
+
     //methods for TestScript resource
     public static TestScript createTestScript(final String serviceProviderId, final String testScriptId)
            throws URISyntaxException
@@ -57,7 +87,7 @@ public class TestingToolResourcesFactory {
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("serviceProviderId", serviceProviderId);
         pathParameters.put("testScriptId", testScriptId);
-        String instanceURI = "serviceProviders/{serviceProviderId}/testScripts/{testScriptId}";
+        String instanceURI = "serviceProviders1/{serviceProviderId}/service1/testScripts/{testScriptId}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);

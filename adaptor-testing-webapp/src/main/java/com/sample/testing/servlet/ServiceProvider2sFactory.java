@@ -39,22 +39,23 @@ import org.eclipse.lyo.oslc4j.core.model.Publisher;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProviderFactory;
 
+import com.sample.testing.resources.FoafDomainConstants;
 import com.sample.testing.resources.DctermsDomainConstants;
 import com.sample.testing.resources.Oslc_qmDomainConstants;
 import com.sample.testing.resources.Oslc_rmDomainConstants;
-import com.sample.testing.services.ServiceProviderService1;
+import com.sample.testing.services.ServiceProvider2Service1;
 
 // Start of user code imports
 // End of user code
 
-public class ServiceProvidersFactory
+public class ServiceProvider2sFactory
 {
     private static Class<?>[] RESOURCE_CLASSES =
     {
-        ServiceProviderService1.class
+        ServiceProvider2Service1.class
     };
 
-    private ServiceProvidersFactory()
+    private ServiceProvider2sFactory()
     {
         super();
     }
@@ -79,9 +80,9 @@ public class ServiceProvidersFactory
             new PrefixDefinition(OslcConstants.OSLC_DATA_NAMESPACE_PREFIX, new URI(OslcConstants.OSLC_DATA_NAMESPACE)),
             new PrefixDefinition(OslcConstants.RDF_NAMESPACE_PREFIX, new URI(OslcConstants.RDF_NAMESPACE)),
             new PrefixDefinition(OslcConstants.RDFS_NAMESPACE_PREFIX, new URI(OslcConstants.RDFS_NAMESPACE)),
-            new PrefixDefinition(DctermsDomainConstants.DUBLIN_CORE_NAMSPACE_PREFIX, new URI(DctermsDomainConstants.DUBLIN_CORE_NAMSPACE))
+            new PrefixDefinition(FoafDomainConstants.FOAF_NAMSPACE_PREFIX, new URI(FoafDomainConstants.FOAF_NAMSPACE))
 ,
-            new PrefixDefinition(Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE_PREFIX, new URI(Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE))
+            new PrefixDefinition(DctermsDomainConstants.DUBLIN_CORE_NAMSPACE_PREFIX, new URI(DctermsDomainConstants.DUBLIN_CORE_NAMSPACE))
 ,
             new PrefixDefinition(Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE_PREFIX, new URI(Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE))
         };

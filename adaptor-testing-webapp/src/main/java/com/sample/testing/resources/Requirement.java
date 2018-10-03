@@ -71,6 +71,8 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import com.sample.testing.resources.Oslc_rmDomainConstants;
+
+
 import com.sample.testing.resources.DctermsDomainConstants;
 
 // Start of user code imports
@@ -81,9 +83,9 @@ import com.sample.testing.resources.DctermsDomainConstants;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE)
-@OslcName(Oslc_rmDomainConstants.REQUIREMENT)
-@OslcResourceShape(title = "Requirement Resource Shape", describes = Oslc_rmDomainConstants.TYPE_REQUIREMENT)
+@OslcNamespace(Oslc_rmDomainConstants.REQUIREMENT_NAMESPACE)
+@OslcName(Oslc_rmDomainConstants.REQUIREMENT_LOCALNAME)
+@OslcResourceShape(title = "Requirement Resource Shape", describes = Oslc_rmDomainConstants.REQUIREMENT_TYPE)
 public class Requirement
     extends AbstractResource
     implements IRequirement
@@ -117,11 +119,56 @@ public class Requirement
         // End of user code
     }
     
+    /**
+    * @deprecated Use the methods in class {@link com.sample.testing.TestingToolResourcesFactory} instead.
+    */
+    @Deprecated
+    public Requirement(final String serviceProviderId, final String requirementId)
+           throws URISyntaxException
+    {
+        this (constructURI(serviceProviderId, requirementId));
+        // Start of user code constructor3
+        // End of user code
+    }
+    
+    /**
+    * @deprecated Use the methods in class {@link com.sample.testing.TestingToolResourcesFactory} instead.
+    */
+    @Deprecated
+    public static URI constructURI(final String serviceProviderId, final String requirementId)
+    {
+        String basePath = OSLC4JUtils.getServletURI();
+        Map<String, Object> pathParameters = new HashMap<String, Object>();
+        pathParameters.put("serviceProviderId", serviceProviderId);
+        pathParameters.put("requirementId", requirementId);
+        String instanceURI = "serviceProviders1/{serviceProviderId}/service2/resources/requirements/{requirementId}";
+    
+        final UriBuilder builder = UriBuilder.fromUri(basePath);
+        return builder.path(instanceURI).buildFromMap(pathParameters);
+    }
+    
+    /**
+    * @deprecated Use the methods in class {@link com.sample.testing.TestingToolResourcesFactory} instead.
+    */
+    @Deprecated
+    public static Link constructLink(final String serviceProviderId, final String requirementId , final String label)
+    {
+        return new Link(constructURI(serviceProviderId, requirementId), label);
+    }
+    
+    /**
+    * @deprecated Use the methods in class {@link com.sample.testing.TestingToolResourcesFactory} instead.
+    */
+    @Deprecated
+    public static Link constructLink(final String serviceProviderId, final String requirementId)
+    {
+        return new Link(constructURI(serviceProviderId, requirementId));
+    }
     
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        Oslc_rmDomainConstants.PATH_REQUIREMENT,
+        Oslc_rmDomainConstants.REQUIREMENT_PATH,
         Requirement.class);
     }
     

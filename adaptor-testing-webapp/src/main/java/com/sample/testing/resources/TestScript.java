@@ -71,6 +71,8 @@ import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 
 import com.sample.testing.resources.Oslc_qmDomainConstants;
+
+
 import com.sample.testing.resources.DctermsDomainConstants;
 import com.sample.testing.resources.Oslc_qmDomainConstants;
 import com.sample.testing.resources.Oslc_rmDomainConstants;
@@ -84,9 +86,9 @@ import com.sample.testing.resources.Requirement;
 
 // Start of user code classAnnotations
 // End of user code
-@OslcNamespace(Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE)
-@OslcName(Oslc_qmDomainConstants.TESTSCRIPT)
-@OslcResourceShape(title = "Test Script Resource Shape", describes = Oslc_qmDomainConstants.TYPE_TESTSCRIPT)
+@OslcNamespace(Oslc_qmDomainConstants.TESTSCRIPT_NAMESPACE)
+@OslcName(Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME)
+@OslcResourceShape(title = "TestScript Resource Shape", describes = Oslc_qmDomainConstants.TESTSCRIPT_TYPE)
 public class TestScript
     extends AbstractResource
     implements ITestScript
@@ -145,7 +147,7 @@ public class TestScript
         Map<String, Object> pathParameters = new HashMap<String, Object>();
         pathParameters.put("serviceProviderId", serviceProviderId);
         pathParameters.put("testScriptId", testScriptId);
-        String instanceURI = "serviceProviders/{serviceProviderId}/testScripts/{testScriptId}";
+        String instanceURI = "serviceProviders1/{serviceProviderId}/service1/testScripts/{testScriptId}";
     
         final UriBuilder builder = UriBuilder.fromUri(basePath);
         return builder.path(instanceURI).buildFromMap(pathParameters);
@@ -172,7 +174,7 @@ public class TestScript
     public static ResourceShape createResourceShape() throws OslcCoreApplicationException, URISyntaxException {
         return ResourceShapeFactory.createResourceShape(OSLC4JUtils.getServletURI(),
         OslcConstants.PATH_RESOURCE_SHAPES,
-        Oslc_qmDomainConstants.PATH_TESTSCRIPT,
+        Oslc_qmDomainConstants.TESTSCRIPT_PATH,
         TestScript.class);
     }
     
@@ -189,7 +191,7 @@ public class TestScript
         // End of user code
     
         if (asLocalResource) {
-            result = result + "{a Local Test Script Resource} - update Test Script.toString() to present resource as desired.";
+            result = result + "{a Local TestScript Resource} - update TestScript.toString() to present resource as desired.";
             // Start of user code toString_bodyForLocalResource
             // End of user code
         }
@@ -250,7 +252,7 @@ public class TestScript
     @OslcPropertyDefinition(Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE + "validatesRequirement")
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.Resource)
-    @OslcRange({Oslc_rmDomainConstants.TYPE_REQUIREMENT})
+    @OslcRange({Oslc_rmDomainConstants.REQUIREMENT_TYPE})
     @OslcReadOnly(false)
     public Link getValidatesRequirement()
     {

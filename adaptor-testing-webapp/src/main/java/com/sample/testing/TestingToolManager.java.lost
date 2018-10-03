@@ -1,0 +1,25 @@
+
+Wed Oct 03 22:21:00 CEST 2018
+================================================================================
+Start of user code createTestScript
+		try {
+			int id = randomNumber(1, 500);
+			newResource = TestingToolResourcesFactory.createTestScript(serviceProviderId, Integer.toString(id));
+			newResource.setTitle("A sample TestScriot with id:" + id);
+		} catch (URISyntaxException e) {
+            log.error("Failed to create resource", e);
+		}
+        // End of user code
+Start of user code "ServiceProviderInfo[] getServiceProviderInfos(...)"
+        ServiceProviderInfo r1 = new ServiceProviderInfo();
+        r1.name = "A sample RM Service Provider 1";
+        r1.serviceProviderId = "1";
+
+        ServiceProviderInfo r2 = new ServiceProviderInfo();
+        r2.name = "A sample RM Service Provider 2";
+        r2.serviceProviderId = "2";
+
+        serviceProviderInfos = new ServiceProviderInfo[2];
+        serviceProviderInfos[0] = r1;
+        serviceProviderInfos[1] = r2;
+        // End of user code

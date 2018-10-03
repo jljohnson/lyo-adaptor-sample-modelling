@@ -81,6 +81,8 @@ import com.sample.testing.resources.Oslc_qmDomainConstants;
 import com.sample.testing.servlet.ServiceProviderCatalogSingleton;
 import com.sample.testing.resources.Requirement;
 import com.sample.testing.resources.TestScript;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 // Start of user code imports
 // End of user code
@@ -88,8 +90,9 @@ import com.sample.testing.resources.TestScript;
 // Start of user code pre_class_code
 // End of user code
 @OslcService(Oslc_qmDomainConstants.QUALITY_MANAGEMENT_DOMAIN)
-@Path("serviceProviders/{serviceProviderId}/testScripts")
-public class ServiceProviderService1
+@Path("serviceProviders1/{serviceProviderId}/service1/testScripts")
+@Api(value = "OSLC Service for {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}")
+public class ServiceProvider1Service1
 {
     @Context private HttpServletRequest httpServletRequest;
     @Context private HttpServletResponse httpServletResponse;
@@ -101,7 +104,7 @@ public class ServiceProviderService1
     // Start of user code class_methods
     // End of user code
 
-    public ServiceProviderService1()
+    public ServiceProvider1Service1()
     {
         super();
     }
@@ -110,13 +113,19 @@ public class ServiceProviderService1
     (
         title = "QueryCapability",
         label = "QueryCapability",
-        resourceShape = OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.PATH_TESTSCRIPT,
-        resourceTypes = {Oslc_qmDomainConstants.TYPE_TESTSCRIPT},
+        resourceShape = OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH,
+        resourceTypes = {Oslc_qmDomainConstants.TESTSCRIPT_TYPE},
         usages = {}
     )
     @GET
     @Path("query")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @ApiOperation(
+        value = "Query capability for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "Query capability for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     public TestScript[] queryTestScripts(
                                                     @PathParam("serviceProviderId") final String serviceProviderId ,
                                                      @QueryParam("oslc.where") final String where,
@@ -143,6 +152,12 @@ public class ServiceProviderService1
     @GET
     @Path("query")
     @Produces({ MediaType.TEXT_HTML })
+    @ApiOperation(
+        value = "Query capability for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "Query capability for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML
+    )
     public Response queryTestScriptsAsHtml(
                                     @PathParam("serviceProviderId") final String serviceProviderId ,
                                        @QueryParam("oslc.where") final String where,
@@ -192,21 +207,27 @@ public class ServiceProviderService1
     (
          title = "CreationFactory",
          label = "",
-         resourceShapes = {OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.PATH_TESTSCRIPT},
-         resourceTypes = {Oslc_qmDomainConstants.TYPE_TESTSCRIPT},
+         resourceShapes = {OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH},
+         resourceTypes = {Oslc_qmDomainConstants.TESTSCRIPT_TYPE},
          usages = {}
     )
     @POST
     @Path("create")
     @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
-    public Response createTestScript(
+    @ApiOperation(
+        value = "Creation factory for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "Creation factory for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE
+    )
+    public Response createTestScriptForCreationFactory(
             @PathParam("serviceProviderId") final String serviceProviderId ,
             final TestScript aResource
         ) throws IOException, ServletException
     {
         try {
-            TestScript newResource = TestingToolManager.createTestScript(httpServletRequest, aResource, serviceProviderId);
+            TestScript newResource = TestingToolManager.createTestScriptForCreationFactory(httpServletRequest, aResource, serviceProviderId);
             httpServletResponse.setHeader("ETag", TestingToolManager.getETagFromTestScript(newResource));
             return Response.created(newResource.getAbout()).entity(newResource).header(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2).build();
         } catch (Exception e) {
@@ -218,6 +239,12 @@ public class ServiceProviderService1
     @GET
     @Path("{testScriptId}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @ApiOperation(
+        value = "GET for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "GET for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+    )
     public TestScript getTestScript(
                 @PathParam("serviceProviderId") final String serviceProviderId, @PathParam("testScriptId") final String testScriptId
         ) throws IOException, ServletException, URISyntaxException
@@ -240,6 +267,12 @@ public class ServiceProviderService1
     @GET
     @Path("{testScriptId}")
     @Produces({ MediaType.TEXT_HTML })
+    @ApiOperation(
+        value = "GET for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "GET for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+    )
     public Response getTestScriptAsHtml(
         @PathParam("serviceProviderId") final String serviceProviderId, @PathParam("testScriptId") final String testScriptId
         ) throws ServletException, IOException, URISyntaxException
@@ -264,6 +297,12 @@ public class ServiceProviderService1
     @GET
     @Path("{testScriptId}")
     @Produces({OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML})
+    @ApiOperation(
+        value = "GET for resources of type {" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "}",
+        notes = "GET for resources of type {" + "<a href=\"" + Oslc_qmDomainConstants.TESTSCRIPT_TYPE + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}" +
+            ", with respective resource shapes {" + "<a href=\"" + "../services/" + OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH + "\">" + Oslc_qmDomainConstants.TESTSCRIPT_LOCALNAME + "</a>" + "}",
+        produces = OslcMediaType.APPLICATION_RDF_XML + ", " + OslcMediaType.APPLICATION_XML + ", " + OslcMediaType.APPLICATION_JSON + ", " + OslcMediaType.TEXT_TURTLE + ", " + MediaType.TEXT_HTML + ", " + OslcMediaType.APPLICATION_X_OSLC_COMPACT_XML
+    )
     public Compact getTestScriptCompact(
         @PathParam("serviceProviderId") final String serviceProviderId, @PathParam("testScriptId") final String testScriptId
         ) throws ServletException, IOException, URISyntaxException
@@ -295,12 +334,12 @@ public class ServiceProviderService1
             smallPreview.setDocument(UriBuilder.fromUri(aTestScript.getAbout()).path("smallPreview").build());
             compact.setSmallPreview(smallPreview);
 
-            //Use the HTML representation of a change request as the large preview as well
             final Preview largePreview = new Preview();
             largePreview.setHintHeight(largePreviewHintHeight);
             largePreview.setHintWidth(largePreviewHintWidth);
-            largePreview.setDocument(aTestScript.getAbout());
+            largePreview.setDocument(UriBuilder.fromUri(aTestScript.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
+
             httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
             return compact;
         }
@@ -325,6 +364,31 @@ public class ServiceProviderService1
             // End of user code
 
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/sample/testing/testscriptsmallpreview.jsp");
+            httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
+            rd.forward(httpServletRequest, httpServletResponse);
+        }
+
+        throw new WebApplicationException(Status.NOT_FOUND);
+    }
+
+    @GET
+    @Path("{testScriptId}/largePreview")
+    @Produces({ MediaType.TEXT_HTML })
+    public void getTestScriptAsHtmlLargePreview(
+        @PathParam("serviceProviderId") final String serviceProviderId, @PathParam("testScriptId") final String testScriptId
+        ) throws ServletException, IOException, URISyntaxException
+    {
+        // Start of user code getTestScriptAsHtmlLargePreview_init
+        // End of user code
+
+        final TestScript aTestScript = TestingToolManager.getTestScript(httpServletRequest, serviceProviderId, testScriptId);
+
+        if (aTestScript != null) {
+            httpServletRequest.setAttribute("aTestScript", aTestScript);
+            // Start of user code getTestScriptAsHtmlLargePreview_setAttributes
+            // End of user code
+
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/sample/testing/testscriptlargepreview.jsp");
             httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
             rd.forward(httpServletRequest, httpServletResponse);
         }

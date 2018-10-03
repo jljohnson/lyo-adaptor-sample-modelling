@@ -53,15 +53,19 @@ import org.eclipse.lyo.oslc4j.provider.jena.JenaProvidersRegistry;
 import org.eclipse.lyo.oslc4j.provider.json4j.Json4JProvidersRegistry;
 
 import com.sample.testing.services.ServiceProviderCatalogService;
-import com.sample.testing.services.ServiceProviderService;
+import com.sample.testing.services.ServiceProvider1Service;
+import com.sample.testing.services.ServiceProvider2Service;
 import com.sample.testing.services.ResourceShapeService;
 
 import com.sample.testing.resources.Requirement;
 import com.sample.testing.resources.TestScript;
+import com.sample.testing.resources.FoafDomainConstants;
 import com.sample.testing.resources.DctermsDomainConstants;
 import com.sample.testing.resources.Oslc_qmDomainConstants;
 import com.sample.testing.resources.Oslc_rmDomainConstants;
-import com.sample.testing.services.ServiceProviderService1;
+import com.sample.testing.services.ServiceProvider1Service1;
+import com.sample.testing.services.ServiceProvider1Service2;
+import com.sample.testing.services.ServiceProvider2Service1;
 
 // Start of user code imports
 // End of user code
@@ -84,15 +88,22 @@ public class Application extends OslcWinkApplication {
     {
         RESOURCE_CLASSES.addAll(JenaProvidersRegistry.getProviders());
         RESOURCE_CLASSES.addAll(Json4JProvidersRegistry.getProviders());
-        RESOURCE_CLASSES.add(ServiceProviderService1.class);
+        RESOURCE_CLASSES.add(ServiceProvider1Service1.class);
+        RESOURCE_CLASSES.add(ServiceProvider1Service2.class);
+        RESOURCE_CLASSES.add(ServiceProvider2Service1.class);
 
         // Catalog resources
         RESOURCE_CLASSES.add(ServiceProviderCatalogService.class);
-        RESOURCE_CLASSES.add(ServiceProviderService.class);
+        RESOURCE_CLASSES.add(ServiceProvider1Service.class);
+        RESOURCE_CLASSES.add(ServiceProvider2Service.class);
         RESOURCE_CLASSES.add(ResourceShapeService.class);
 
+        // Swagger resources
+        RESOURCE_CLASSES.add(io.swagger.jaxrs.listing.ApiListingResource.class);
+        RESOURCE_CLASSES.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+
         // Start of user code Custom Resource Classes
-            // End of user code
+        // End of user code
 
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_ALLOWED_VALUES,           AllowedValues.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_COMPACT,                  Compact.class);
@@ -111,8 +122,8 @@ public class Application extends OslcWinkApplication {
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER,         ServiceProvider.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_SERVICE_PROVIDER_CATALOG, ServiceProviderCatalog.class);
 
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_rmDomainConstants.PATH_REQUIREMENT, Requirement.class);
-        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_qmDomainConstants.PATH_TESTSCRIPT, TestScript.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_rmDomainConstants.REQUIREMENT_PATH, Requirement.class);
+        RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(Oslc_qmDomainConstants.TESTSCRIPT_PATH, TestScript.class);
     }
 
     public Application()

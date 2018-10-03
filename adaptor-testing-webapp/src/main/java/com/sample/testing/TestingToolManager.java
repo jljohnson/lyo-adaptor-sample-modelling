@@ -31,7 +31,8 @@ import java.util.List;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 import com.sample.testing.servlet.ServiceProviderCatalogSingleton;
-import com.sample.testing.ServiceProviderInfo;
+import com.sample.testing.ServiceProvider1Info;
+import com.sample.testing.ServiceProvider2Info;
 import com.sample.testing.resources.Requirement;
 import com.sample.testing.resources.TestScript;
 
@@ -64,14 +65,14 @@ public class TestingToolManager {
 	}
 
 	private static Link queryForRandomRequirementLink() throws URISyntaxException {
-		try {
-			String[] requirements = RequirementsAdaptorClient.queryRequirements();
-			int index = randomNumber(0, requirements.length);
-			return new Link (new URI (requirements[index]));
-		} catch (Exception e) {
-            log.error("Failed to query resources", e);
+//		try {
+//			String[] requirements = RequirementsAdaptorClient.queryRequirements();
+//			int index = randomNumber(0, requirements.length);
+//			return new Link (new URI (requirements[index]));
+//		} catch (Exception e) {
+//            log.error("Failed to query resources", e);
             return null;
-		}
+//		}
 	}
 
 	private static TestScript createRandomTestScript(String serviceProviderId, String id) {
@@ -114,22 +115,21 @@ public class TestingToolManager {
         // End of user code
     }
 
-    public static ServiceProviderInfo[] getServiceProviderInfos(HttpServletRequest httpServletRequest)
+    public static ServiceProvider1Info[] getServiceProvider1Infos(HttpServletRequest httpServletRequest)
     {
-        ServiceProviderInfo[] serviceProviderInfos = {};
+        ServiceProvider1Info[] serviceProviderInfos = {};
         
-        // Start of user code "ServiceProviderInfo[] getServiceProviderInfos(...)"
-        ServiceProviderInfo r1 = new ServiceProviderInfo();
-        r1.name = "A sample RM Service Provider 1";
-        r1.serviceProviderId = "1";
-
-        ServiceProviderInfo r2 = new ServiceProviderInfo();
-        r2.name = "A sample RM Service Provider 2";
-        r2.serviceProviderId = "2";
-
-        serviceProviderInfos = new ServiceProviderInfo[2];
-        serviceProviderInfos[0] = r1;
-        serviceProviderInfos[1] = r2;
+        // Start of user code "ServiceProvider1Info[] getServiceProvider1Infos(...)"
+        // TODO Implement code to return the set of ServiceProviders
+        // End of user code
+        return serviceProviderInfos;
+    }
+    public static ServiceProvider2Info[] getServiceProvider2Infos(HttpServletRequest httpServletRequest)
+    {
+        ServiceProvider2Info[] serviceProviderInfos = {};
+        
+        // Start of user code "ServiceProvider2Info[] getServiceProvider2Infos(...)"
+        // TODO Implement code to return the set of ServiceProviders
         // End of user code
         return serviceProviderInfos;
     }
@@ -143,18 +143,12 @@ public class TestingToolManager {
         // End of user code
         return resources;
     }
-    public static TestScript createTestScript(HttpServletRequest httpServletRequest, final TestScript aResource, final String serviceProviderId)
+    public static TestScript createTestScriptForCreationFactory(HttpServletRequest httpServletRequest, final TestScript aResource, final String serviceProviderId)
     {
         TestScript newResource = null;
         
-        // Start of user code createTestScript
-		try {
-			int id = randomNumber(1, 500);
-			newResource = TestingToolResourcesFactory.createTestScript(serviceProviderId, Integer.toString(id));
-			newResource.setTitle("A sample TestScriot with id:" + id);
-		} catch (URISyntaxException e) {
-            log.error("Failed to create resource", e);
-		}
+        // Start of user code createTestScriptForCreationFactory
+        // TODO Implement code to create a resource
         // End of user code
         return newResource;
     }
@@ -172,7 +166,59 @@ public class TestingToolManager {
 
 
 
+    public static List<Requirement> queryRequirementsForQueryCapability1(HttpServletRequest httpServletRequest, final String serviceProviderId, String where, int page, int limit)
+    {
+        List<Requirement> resources = null;
+        
+        // Start of user code queryRequirementsForQueryCapability1
+        // TODO Implement code to return a set of resources
+        // End of user code
+        return resources;
+    }
+    public static TestScript createTestScriptForCreationFactory1(HttpServletRequest httpServletRequest, final TestScript aResource, final String serviceProviderId)
+    {
+        TestScript newResource = null;
+        
+        // Start of user code createTestScriptForCreationFactory1
+        // TODO Implement code to create a resource
+        // End of user code
+        return newResource;
+    }
 
+
+    public static Requirement getRequirement(HttpServletRequest httpServletRequest, final String serviceProviderId, final String requirementId)
+    {
+        Requirement aResource = null;
+        
+        // Start of user code getRequirement
+        // TODO Implement code to return a resource
+        // End of user code
+        return aResource;
+    }
+
+
+
+    public static List<Requirement> queryRequirementsForQueryCapability2(HttpServletRequest httpServletRequest, final String serviceProviderId, String where, int page, int limit)
+    {
+        List<Requirement> resources = null;
+        
+        // Start of user code queryRequirementsForQueryCapability2
+        // TODO Implement code to return a set of resources
+        // End of user code
+        return resources;
+    }
+
+
+
+
+    public static String getETagFromRequirement(final Requirement aResource)
+    {
+        String eTag = null;
+        // Start of user code getETagFromRequirement
+        // TODO Implement code to return an ETag for a particular resource
+        // End of user code
+        return eTag;
+    }
     public static String getETagFromTestScript(final TestScript aResource)
     {
         String eTag = null;

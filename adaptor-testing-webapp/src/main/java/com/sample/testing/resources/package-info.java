@@ -28,6 +28,7 @@
     @OslcNamespaceDefinition(prefix = OslcConstants.OSLC_DATA_NAMESPACE_PREFIX,           namespaceURI = OslcConstants.OSLC_DATA_NAMESPACE),
     @OslcNamespaceDefinition(prefix = OslcConstants.RDF_NAMESPACE_PREFIX,                 namespaceURI = OslcConstants.RDF_NAMESPACE),
     @OslcNamespaceDefinition(prefix = OslcConstants.RDFS_NAMESPACE_PREFIX,                namespaceURI = OslcConstants.RDFS_NAMESPACE),
+    @OslcNamespaceDefinition(prefix = FoafDomainConstants.FOAF_NAMSPACE_PREFIX, namespaceURI = FoafDomainConstants.FOAF_NAMSPACE),
     @OslcNamespaceDefinition(prefix = DctermsDomainConstants.DUBLIN_CORE_NAMSPACE_PREFIX, namespaceURI = DctermsDomainConstants.DUBLIN_CORE_NAMSPACE),
     @OslcNamespaceDefinition(prefix = Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE_PREFIX, namespaceURI = Oslc_qmDomainConstants.QUALITY_MANAGEMENT_NAMSPACE),
     @OslcNamespaceDefinition(prefix = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE_PREFIX, namespaceURI = Oslc_rmDomainConstants.REQUIREMENTS_MANAGEMENT_NAMSPACE)
@@ -38,6 +39,7 @@ import org.eclipse.lyo.oslc4j.core.annotation.OslcNamespaceDefinition;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcSchema;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 
+import com.sample.testing.resources.FoafDomainConstants;
 import com.sample.testing.resources.DctermsDomainConstants;
 import com.sample.testing.resources.Oslc_qmDomainConstants;
 import com.sample.testing.resources.Oslc_rmDomainConstants;

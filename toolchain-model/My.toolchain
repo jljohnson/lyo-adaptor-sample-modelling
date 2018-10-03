@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <oslc4j_tc:Toolchain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface" xmlns:oslc4j_tc="http://org.eclipse.lyo/oslc4j/toolChain">
-  <adaptorInterfaces name="Testing Tool" javaClassBaseNamespace="com.sample.testing" javaFilesBasePath="../adaptor-testing-webapp/src/main/java/" jspFilesBasePath="../adaptor-testing-webapp/src/main/webapp/" javascriptFilesBasePath="../adaptor-testing-webapp/src/main/webapp/" backendCodeTemplate_servletListenerInitialize="" backendCodeTemplate_servletListenerDestroy="" backendCodeTemplate_getResources="" backendCodeTemplate_searchResources="">
+  <adaptorInterfaces name="Testing Tool" javaClassBaseNamespace="com.sample.testing" javaFilesBasePath="../adaptor-testing-webapp/src/main/java/" jspFilesBasePath="../adaptor-testing-webapp/src/main/webapp/" javascriptFilesBasePath="../adaptor-testing-webapp/src/main/webapp/" swaggerDocumentation="true" backendCodeTemplate_servletListenerInitialize="" backendCodeTemplate_servletListenerDestroy="" backendCodeTemplate_getResources="" backendCodeTemplate_searchResources="">
     <serviceProviderCatalog title="Service Provider Catalog">
       <serviceProviders title="Service Provider" serviceNamespace="">
         <services domainSpecification="//@specification/@domainSpecifications.0">
           <creationFactories title="CreationFactory" creationURI="create" resourceTypes="//@specification/@domainSpecifications.0/@resources.1"/>
           <queryCapabilities title="QueryCapability" label="QueryCapability" queryBaseURI="query" resourceTypes="//@specification/@domainSpecifications.0/@resources.1"/>
           <basicCapabilities resourceTypes="//@specification/@domainSpecifications.0/@resources.1"/>
+        </services>
+        <services domainSpecification="//@specification/@domainSpecifications.1">
+          <creationFactories title="CreationFactory1" label="CreationFactory1" creationURI="create" resourceTypes="//@specification/@domainSpecifications.0/@resources.1"/>
+          <queryCapabilities title="QueryCapability1" label="QueryCapability1" queryBaseURI="query" resourceTypes="//@specification/@domainSpecifications.3/@resources.0"/>
+          <basicCapabilities resourceTypes="//@specification/@domainSpecifications.3/@resources.0"/>
+        </services>
+      </serviceProviders>
+      <serviceProviders title="Service Provider 2" description="Service Provider 2">
+        <services domainSpecification="//@specification/@domainSpecifications.1">
+          <queryCapabilities title="QueryCapability2" label="QueryCapability2" queryBaseURI="query" resourceTypes="//@specification/@domainSpecifications.3/@resources.0"/>
         </services>
       </serviceProviders>
     </serviceProviderCatalog>
@@ -30,7 +40,7 @@
   <specification>
     <domainSpecifications name="Quality Management" namespaceURI="http://open-services.net/ns/qm#" namespacePrefix="//@specification/@domainPrefixes.1">
       <resources name="Test Plan" resourceProperties="//@specification/@domainSpecifications.0/@resourceProperties.2 //@specification/@domainSpecifications.2/@resourceProperties.1 //@specification/@domainSpecifications.2/@resourceProperties.0"/>
-      <resources name="Test Script" resourceProperties="//@specification/@domainSpecifications.2/@resourceProperties.1 //@specification/@domainSpecifications.0/@resourceProperties.3 //@specification/@domainSpecifications.2/@resourceProperties.2"/>
+      <resources name="TestScript" resourceProperties="//@specification/@domainSpecifications.2/@resourceProperties.1 //@specification/@domainSpecifications.0/@resourceProperties.3 //@specification/@domainSpecifications.2/@resourceProperties.2"/>
       <resources name="Test Case" resourceProperties="//@specification/@domainSpecifications.0/@resourceProperties.1 //@specification/@domainSpecifications.2/@resourceProperties.1 //@specification/@domainSpecifications.2/@resourceProperties.0"/>
       <resourceProperties name="Reports On" valueType="Resource" range="//@specification/@domainSpecifications.0/@resources.2"/>
       <resourceProperties name="uses" valueType="Resource" range="//@specification/@domainSpecifications.0/@resources.1"/>

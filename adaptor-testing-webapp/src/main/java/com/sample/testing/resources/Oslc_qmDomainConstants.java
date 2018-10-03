@@ -27,6 +27,7 @@ package com.sample.testing.resources;
 
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 
+
 // Start of user code imports
 // End of user code
 
@@ -39,13 +40,16 @@ public interface Oslc_qmDomainConstants
     public static String QUALITY_MANAGEMENT_NAMSPACE = "http://open-services.net/ns/qm#";
     public static String QUALITY_MANAGEMENT_NAMSPACE_PREFIX = "oslc_qm";
 
-    public static String TESTCASE = "TestCase";
-    public static String PATH_TESTCASE = "testCase";
-    public static String TYPE_TESTCASE = QUALITY_MANAGEMENT_NAMSPACE + TESTCASE;
-    public static String TESTPLAN = "TestPlan";
-    public static String PATH_TESTPLAN = "testPlan";
-    public static String TYPE_TESTPLAN = QUALITY_MANAGEMENT_NAMSPACE + TESTPLAN;
-    public static String TESTSCRIPT = "TestScript";
-    public static String PATH_TESTSCRIPT = "testScript";
-    public static String TYPE_TESTSCRIPT = QUALITY_MANAGEMENT_NAMSPACE + TESTSCRIPT;
+    public static String TEST_CASE_PATH = "testCase";
+    public static String TEST_CASE_NAMESPACE = QUALITY_MANAGEMENT_NAMSPACE; //namespace of the rdfs:class the resource describes
+    public static String TEST_CASE_LOCALNAME = "Test Case"; //localName of the rdfs:class the resource describes
+    public static String TEST_CASE_TYPE = TEST_CASE_NAMESPACE + TEST_CASE_LOCALNAME; //fullname of the rdfs:class the resource describes
+    public static String TEST_PLAN_PATH = "testPlan";
+    public static String TEST_PLAN_NAMESPACE = QUALITY_MANAGEMENT_NAMSPACE; //namespace of the rdfs:class the resource describes
+    public static String TEST_PLAN_LOCALNAME = "Test Plan"; //localName of the rdfs:class the resource describes
+    public static String TEST_PLAN_TYPE = TEST_PLAN_NAMESPACE + TEST_PLAN_LOCALNAME; //fullname of the rdfs:class the resource describes
+    public static String TESTSCRIPT_PATH = "testScript";
+    public static String TESTSCRIPT_NAMESPACE = QUALITY_MANAGEMENT_NAMSPACE; //namespace of the rdfs:class the resource describes
+    public static String TESTSCRIPT_LOCALNAME = "TestScript"; //localName of the rdfs:class the resource describes
+    public static String TESTSCRIPT_TYPE = TESTSCRIPT_NAMESPACE + TESTSCRIPT_LOCALNAME; //fullname of the rdfs:class the resource describes
 }
