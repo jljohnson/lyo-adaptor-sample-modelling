@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Set;
 
 
-import org.eclipse.lyo.oslc4j.application.OslcWinkApplication;
 import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.AllowedValues;
 import org.eclipse.lyo.oslc4j.core.model.Compact;
@@ -46,15 +45,17 @@ import org.eclipse.lyo.oslc4j.core.model.Property;
 import org.eclipse.lyo.oslc4j.core.model.Publisher;
 import org.eclipse.lyo.oslc4j.core.model.QueryCapability;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
+import org.eclipse.lyo.oslc4j.core.model.ResourceShapeFactory;
 import org.eclipse.lyo.oslc4j.core.model.Service;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;
 import org.eclipse.lyo.oslc4j.provider.jena.JenaProvidersRegistry;
 import org.eclipse.lyo.oslc4j.provider.json4j.Json4JProvidersRegistry;
+import org.glassfish.jersey.server.ResourceConfig;
 
+import com.sample.rm.services.ResourceShapeService;
 import com.sample.rm.services.ServiceProviderCatalogService;
 import com.sample.rm.services.ServiceProviderService;
-import com.sample.rm.services.ResourceShapeService;
 
 import com.sample.rm.resources.Requirement;
 import com.sample.rm.resources.DctermsDomainConstants;
@@ -67,7 +68,7 @@ import com.sample.rm.services.ServiceProviderService1;
 // Start of user code pre_class_code
 // End of user code
 
-public class Application extends OslcWinkApplication {
+public class Application extends ResourceConfig {
 
     private static final Set<Class<?>>         RESOURCE_CLASSES                          = new HashSet<Class<?>>();
     private static final Map<String, Class<?>> RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP = new HashMap<String, Class<?>>();
@@ -116,9 +117,21 @@ public class Application extends OslcWinkApplication {
            throws OslcCoreApplicationException,
                   URISyntaxException
     {
-        super(RESOURCE_CLASSES,
-              OslcConstants.PATH_RESOURCE_SHAPES,
-              RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP);
+    	//MOVE ALL THE STUFF THAT WAS DONE IN THE SUPER OSLC-WINK CLASS TO HERE!
+    	//BUT HOW DO WE MAKE SURE THESE 2 ACTIONS ARE DONE BY AN APPLICATION?
+    	//1. Register all JAX-RS Resources.
+    	//2. Verify all OSLC4J resource classes, by simply trying to create them.
+		//Should this verification be done here, or should it move to the Listener class?
+//        super(RESOURCE_CLASSES,
+//                OslcConstants.PATH_RESOURCE_SHAPES,
+//                RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP);
+    	registerClasses(RESOURCE_CLASSES);
+		final String BASE_URI = "http://localhost/validatingResourceShapes";
+		for (final Map.Entry<String, Class<?>> entry : RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.entrySet())
+		{
+			ResourceShapeFactory.createResourceShape(BASE_URI, OslcConstants.PATH_RESOURCE_SHAPES, entry.getKey(), entry.getValue());
+		}
+
     }
 
     public static Map<String, Class<?>> getResourceShapePathToResourceClassMap() {
