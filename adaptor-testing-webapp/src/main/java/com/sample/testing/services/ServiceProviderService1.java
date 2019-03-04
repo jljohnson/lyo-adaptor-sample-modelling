@@ -106,17 +106,26 @@ public class ServiceProviderService1
         super();
     }
 
+    private void addCORSHeaders (final HttpServletResponse httpServletResponse) {
+        //UI preview can be blocked by CORS policy.
+        //add select CORS headers to every response that is embedded in an iframe.
+        httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD");
+        httpServletResponse.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+        httpServletResponse.addHeader("Access-Control-Allow-Credentials", "true");
+    }
+
     @OslcQueryCapability
     (
         title = "QueryCapability",
         label = "QueryCapability",
-        resourceShape = OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TEST_SCRIPT_PATH,
-        resourceTypes = {Oslc_qmDomainConstants.TEST_SCRIPT_TYPE},
+        resourceShape = OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH,
+        resourceTypes = {Oslc_qmDomainConstants.TESTSCRIPT_TYPE},
         usages = {}
     )
     @GET
     @Path("query")
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public TestScript[] queryTestScripts(
                                                     @PathParam("serviceProviderId") final String serviceProviderId ,
                                                      @QueryParam("oslc.where") final String where,
@@ -192,14 +201,14 @@ public class ServiceProviderService1
     (
          title = "CreationFactory",
          label = "",
-         resourceShapes = {OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TEST_SCRIPT_PATH},
-         resourceTypes = {Oslc_qmDomainConstants.TEST_SCRIPT_TYPE},
+         resourceShapes = {OslcConstants.PATH_RESOURCE_SHAPES + "/" + Oslc_qmDomainConstants.TESTSCRIPT_PATH},
+         resourceTypes = {Oslc_qmDomainConstants.TESTSCRIPT_TYPE},
          usages = {}
     )
     @POST
     @Path("create")
-    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @Consumes({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON })
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public Response createTestScript(
             @PathParam("serviceProviderId") final String serviceProviderId ,
             final TestScript aResource
@@ -217,7 +226,7 @@ public class ServiceProviderService1
 
     @GET
     @Path("{testScriptId}")
-    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON, OslcMediaType.TEXT_TURTLE})
+    @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
     public TestScript getTestScript(
                 @PathParam("serviceProviderId") final String serviceProviderId, @PathParam("testScriptId") final String testScriptId
         ) throws IOException, ServletException, URISyntaxException
@@ -302,6 +311,7 @@ public class ServiceProviderService1
             compact.setLargePreview(largePreview);
 
             httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
+            addCORSHeaders(httpServletResponse);
             return compact;
         }
         throw new WebApplicationException(Status.NOT_FOUND);
@@ -326,6 +336,7 @@ public class ServiceProviderService1
 
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/sample/testing/testscriptsmallpreview.jsp");
             httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
+            addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
         }
 
@@ -351,6 +362,7 @@ public class ServiceProviderService1
 
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/sample/testing/testscriptlargepreview.jsp");
             httpServletResponse.addHeader(TestingToolConstants.HDR_OSLC_VERSION, TestingToolConstants.OSLC_VERSION_V2);
+            addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
         }
 

@@ -60,6 +60,8 @@ public class ServletListener implements ServletContextListener  {
         // Start of user code contextInitialized_init
         // End of user code
 
+        logger.log(Level.INFO, "servletListner Info");
+
         String baseUrl = generateBasePath(servletContextEvent);
         String servletUrlPattern = "services/";
         try {

@@ -60,7 +60,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lyo.clients</groupId>
-			<artifactId>oslc-java-client</artifactId>
+		    <artifactId>oslc4j-client</artifactId>
 			<version>${version.lyo}</version>
 		</dependency>
 		<!-- Servlet-related dependencies -->
