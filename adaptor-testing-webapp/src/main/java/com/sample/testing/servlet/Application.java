@@ -63,6 +63,7 @@ import com.sample.testing.resources.Oslc_rmDomainConstants;
 import com.sample.testing.services.ServiceProviderService1;
 
 // Start of user code imports
+import org.slf4j.bridge.SLF4JBridgeHandler;
 // End of user code
 
 // Start of user code pre_class_code
@@ -118,6 +119,14 @@ public class Application extends javax.ws.rs.core.Application {
            throws OslcCoreApplicationException,
                   URISyntaxException
     {
+        // Optionally remove existing handlers attached to j.u.l root logger
+        SLF4JBridgeHandler.removeHandlersForRootLogger();  // (since SLF4J 1.6.5)
+
+        // add SLF4JBridgeHandler to j.u.l's root logger, should be done once during
+        // the initialization phase of your application
+        SLF4JBridgeHandler.install();
+
+
         final String BASE_URI = "http://localhost/validatingResourceShapes";
         for (final Map.Entry<String, Class<?>> entry : RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.entrySet()) {
             ResourceShapeFactory.createResourceShape(BASE_URI, OslcConstants.PATH_RESOURCE_SHAPES, entry.getKey(), entry.getValue());
